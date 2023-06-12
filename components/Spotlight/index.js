@@ -1,8 +1,8 @@
-import React from "react";
+import Image from "next/image";
 
-const Spotlight = ({ imageSource, artist }) => (
+const Spotlight = ({ image, artist }) => (
   <div>
-    <img src={imageSource} alt={artist} />
+    <Image src={image} alt={artist} height={300} width={300} />
     <p>Artist: {artist}</p>
   </div>
 );
