@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   compiler: {
     styledComponents: true,
@@ -15,4 +14,9 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  ...nextConfig,
+  images: {
+    domains: ["example-apis.vercel.app"],
+  },
+};
