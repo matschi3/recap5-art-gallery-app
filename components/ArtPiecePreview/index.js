@@ -1,13 +1,12 @@
-export default function ArtPiecePreview({ imageSource, title, artist }) {
+// ArtPiecePreview.js
+import Image from "next/image";
+
+export default function ArtPiecePreview({ image, title, artist }) {
   return (
-    <div>
-      <img
-        src={imageSource}
-        alt={title}
-        style={{ width: "20%", height: "auto" }}
-      />
+    <li>
+      <Image src={image} alt={title} width={300} height={300} />
       <h2>{title}</h2>
       <p>Artist: {artist}</p>
-    </div>
+    </li>
   );
 }
