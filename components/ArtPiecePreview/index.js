@@ -1,9 +1,11 @@
-import Image from "next/image";
-
 export default function ArtPiecePreview({ imageSource, title, artist }) {
   return (
     <div>
-      <Image src={imageSource} alt={title} width={300} height={300} />
+      <img
+        src={imageSource}
+        alt={title}
+        style={{ width: "20%", height: "auto" }}
+      />
       <h2>{title}</h2>
       <p>Artist: {artist}</p>
     </div>
