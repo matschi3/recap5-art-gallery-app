@@ -157,8 +157,14 @@ test("render image of artPiece[index0]", () => {
 
 test("render title of artPiece[index0]", () => {
   render(<ArtPieces pieces={pieces} />);
-  const h2 = screen.getByRole("heading", {
+  const titleHeading = screen.getByRole("heading", {
     name: /orange red and green abstract painting/i,
   });
-  expect(h2).toBeInTheDocument();
+  expect(titleHeading).toBeInTheDocument();
+});
+
+test("render artist of artPiece[index0]", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const artistParagraph = screen.getByText("Artist: Steve Johnson");
+  expect(artistParagraph).toBeInTheDocument();
 });
