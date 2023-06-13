@@ -141,7 +141,7 @@ test("the art piece img is displayed", () => {
   expect(spotlightImage).toBeInTheDocument();
 });
 
-// under construction
+// under construction // not finding any img !?!
 test.skip("only one img is displayed", () => {
   const spotlightImages = screen.getAllByRole("img");
   expect(spotlightImages).toHaveLength(1);
