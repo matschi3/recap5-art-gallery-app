@@ -147,12 +147,17 @@ test("render an img for each ArtPiecePreview", () => {
 
 // Each art piece's {image, title, artist} is displayed // test on [0]
 
-test("render image of artPiece[index0]", () => {
+test("render images of artPiece with correct alt-Text", () => {
   render(<ArtPieces pieces={pieces} />);
-  const img = screen.getByRole("img", {
-    name: /orange red and green abstract painting/i,
+  const imagesArtPiece = screen.getAllByRole("img");
+  expect(imagesArtPiece).toHaveLength(pieces.length);
+
+  imagesArtPiece.forEach((image, index) => {
+    expect(image).toHaveProperty("alt", pieces[index].name);
+    //expect(image).toHaveProperty("src", `${pieces[index].imageSource}/$/i`);
+    // regularExpression: '/$' to check if it just ends with expected url. because of local dev server having differt path.
+    // deaktivated, because of way too differt url's  :/
   });
-  expect(img).toBeInTheDocument();
 });
 
 test("render title of artPiece[index0]", () => {
@@ -168,3 +173,5 @@ test("render artist of artPiece[index0]", () => {
   const artistParagraph = screen.getByText("Artist: Steve Johnson");
   expect(artistParagraph).toBeInTheDocument();
 });
+
+// Each art piece's {image, title, artist} is displayed // test on [0]
