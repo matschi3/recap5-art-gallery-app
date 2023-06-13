@@ -124,15 +124,23 @@ const pieces = [
 
 // All art pieces are displayed as a list
 
-test("render an ul for ArtPiecePreview", () => {
+test("render an ul for all the ArtPiecePreview", () => {
   render(<ArtPieces pieces={pieces} />);
   const unorderedList = screen.getByRole("list");
   //console.log(unorderedList);
   expect(unorderedList).toBeInTheDocument();
 });
 
-test("render all ArtPiecePreview-components", () => {
+test("render an li for each ArtPiecePreview", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const listItems = screen.getAllByRole("listitem");
+  //console.log(listItems);
+  expect(listItems).toHaveLength(pieces.length);
+});
+
+test("render an img for each ArtPiecePreview", () => {
   render(<ArtPieces pieces={pieces} />);
   const listImages = screen.getAllByRole("img", { name: pieces.title });
+  //console.log(listImages);
   expect(listImages).toHaveLength(pieces.length);
 });
