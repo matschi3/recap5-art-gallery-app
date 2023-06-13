@@ -1,7 +1,12 @@
+import React from "react";
 import { useRouter } from "next/router";
 import ArtPieceDetails from "../../components/ArtPieceDetails";
 
-const ArtPiecePage = ({ artPieces }) => {
+const ArtPiecePage = ({
+  artPieces,
+  favoriteArtPieces,
+  setFavoriteArtPieces,
+}) => {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -13,6 +18,19 @@ const ArtPiecePage = ({ artPieces }) => {
 
   const { imageSource, name, artist, year, genre } = selectedArtPiece;
 
+  const isFavorite = favoriteArtPieces.includes(slug);
+
+  const onToggleFavorite = () => {
+    if (isFavorite) {
+      const updatedFavorites = favoriteArtPieces.filter(
+        (favoriteSlug) => favoriteSlug !== slug
+      );
+      setFavoriteArtPieces(updatedFavorites);
+    } else {
+      setFavoriteArtPieces([...favoriteArtPieces, slug]);
+    }
+  };
+
   return (
     <>
       <ArtPieceDetails
@@ -21,6 +39,8 @@ const ArtPiecePage = ({ artPieces }) => {
         artist={artist}
         year={year}
         genre={genre}
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
       />
     </>
   );

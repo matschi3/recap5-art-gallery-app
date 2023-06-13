@@ -3,7 +3,7 @@ import Spotlight from "../components/Spotlight";
 
 const pickRandomArtPiece = (artPieces) => {
   if (artPieces.length === 0) {
-    return artpieces[0]; // Handle the case when artPieces is empty
+    return artpieces[0];
   }
 
   const randomIndex = Math.floor(Math.random() * artPieces.length);
@@ -15,10 +15,7 @@ export default function SpotlightPage({
   favoriteArtPieces,
   setFavoriteArtPieces,
 }) {
-  console.log("Pieces spot:", artPieces); // Log the value of the pieces prop
-
   const spotlightPiece = pickRandomArtPiece(artPieces);
-  console.log("Spotlight Piece spot:", spotlightPiece); // Log the spotlightPiece value
 
   const isFavorite = (slug) => favoriteArtPieces.includes(slug);
 
@@ -32,8 +29,6 @@ export default function SpotlightPage({
       setFavoriteArtPieces([...favoriteArtPieces, slug]);
     }
   };
-
-  console.log("Favorite Art Pieces:", favoriteArtPieces); // Log the value of favoriteArtPieces
 
   return (
     <>

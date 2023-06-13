@@ -7,11 +7,6 @@ export default function ArtPieces({
   isFavorite,
   onToggleFavorite,
 }) {
-  console.log("Art Pieces:", pieces);
-  console.log("onClick:", onClick);
-  console.log("isFavorite:", isFavorite);
-  console.log("onToggleFavorite:", onToggleFavorite);
-
   return (
     <>
       <ul>

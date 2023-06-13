@@ -20,13 +20,13 @@ export default function App({ Component, pageProps }) {
 
   if (error) return <div>Failed to load art pieces.</div>;
   if (!pieces) return <div>Loading...</div>;
-  console.log("Art Pieces:", pieces);
+
   const appProps = {
     ...pageProps,
     artPieces: pieces,
     setArtPieces,
-    favoriteArtPieces, // Pass the favoriteArtPieces state
-    setFavoriteArtPieces, // Pass the function to update favoriteArtPieces
+    favoriteArtPieces,
+    setFavoriteArtPieces,
   };
 
   if (router.pathname === "/") {
