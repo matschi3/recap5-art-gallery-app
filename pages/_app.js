@@ -10,7 +10,9 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const [artPieces, setArtPieces] = useState([]); // define default later
+  const [artPieces, setArtPieces] = useState([]);
+  const [favoriteArtPieces, setFavoriteArtPieces] = useState([]); // Add favoriteArtPieces state
+
   const { data: pieces, error } = useSWR(
     "https://example-apis.vercel.app/api/art",
     fetcher
@@ -18,14 +20,20 @@ export default function App({ Component, pageProps }) {
 
   if (error) return <div>Failed to load art pieces.</div>;
   if (!pieces) return <div>Loading...</div>;
-
-  const appProps = { ...pageProps, artPieces: pieces, setArtPieces, pieces };
+  console.log("Art Pieces:", pieces);
+  const appProps = {
+    ...pageProps,
+    artPieces: pieces,
+    setArtPieces,
+    favoriteArtPieces, // Pass the favoriteArtPieces state
+    setFavoriteArtPieces, // Pass the function to update favoriteArtPieces
+  };
 
   if (router.pathname === "/") {
     return (
       <>
         <Layout>
-          <SpotlightPage {...appProps} pieces={pieces} />
+          <SpotlightPage {...appProps} />
         </Layout>
       </>
     );
