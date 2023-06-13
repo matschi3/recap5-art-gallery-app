@@ -127,6 +127,6 @@ const pieces = [
 
 test("render ul of ArtPiecePreview-components", () => {
   render(<ArtPieces pieces={pieces} />);
-  const unorderedList = screen.getAllByRole("img", { name: pieces.title });
-  expect(unorderedList).toHaveLength(pieces.length);
+  const listsImage = screen.getAllByRole("img", { name: pieces.title });
+  expect(listsImage).toHaveLength(pieces.length);
 });
