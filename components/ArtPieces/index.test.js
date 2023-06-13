@@ -122,8 +122,6 @@ const pieces = [
   },
 ];
 
-// All art pieces are displayed as a list
-
 test("render an ul for all the ArtPiecePreview", () => {
   render(<ArtPieces pieces={pieces} />);
   const unorderedList = screen.getByRole("list");
@@ -147,7 +145,7 @@ test("render an img for each ArtPiecePreview", () => {
 
 // Each art piece's {image, title, artist} is displayed // test on [0]
 
-test("render images of artPieces with correct alt-Text", () => {
+test("render all images from artPieces with correct alt-Text", () => {
   render(<ArtPieces pieces={pieces} />);
   const imagesArtPiece = screen.getAllByRole("img");
   expect(imagesArtPiece).toHaveLength(pieces.length);
@@ -160,7 +158,7 @@ test("render images of artPieces with correct alt-Text", () => {
   });
 });
 
-test("render titles of artPieces with correct titleNames", () => {
+test("render all titles from artPieces with correct titleNames", () => {
   render(<ArtPieces pieces={pieces} />);
   const titleHeadings = screen.getAllByRole("heading", { level: 2 }); // 'level: 2 is the h2 element
 
@@ -171,10 +169,13 @@ test("render titles of artPieces with correct titleNames", () => {
   });
 });
 
-test("render artist of artPiece[index0]", () => {
+test("render all artists from artPieces with correct artistNames", () => {
   render(<ArtPieces pieces={pieces} />);
-  const artistParagraph = screen.getByText("Artist: Steve Johnson");
-  expect(artistParagraph).toBeInTheDocument();
-});
+  const artistParagraphs = screen.getAllByText(/^Artist: /); // starts with 'Artist: '
+  //console.log(artistParagraphs);
+  expect(artistParagraphs).toHaveLength(pieces.length);
 
-// Each art piece's {image, title, artist} is displayed // test on [0]
+  artistParagraphs.forEach((paragraph, index) => {
+    expect(paragraph).toHaveTextContent(`Artist: ${pieces[index].artist}`);
+  });
+});
