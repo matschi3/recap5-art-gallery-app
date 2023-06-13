@@ -12,7 +12,8 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [artPieces, setArtPieces] = useState([]);
-  const [favoriteArtPieces, setFavoriteArtPieces] = useState([]); // Add favoriteArtPieces state
+  const [favoriteArtPieces, setFavoriteArtPieces] = useState([]);
+  const [comments, setComments] = useState([]); // Add comments state
 
   const { data: pieces, error } = useSWR(
     "https://example-apis.vercel.app/api/art",
@@ -28,6 +29,8 @@ export default function App({ Component, pageProps }) {
     setArtPieces,
     favoriteArtPieces,
     setFavoriteArtPieces,
+    comments, // Pass the comments state as a prop
+    setComments, // Pass the setComments function as a prop
   };
 
   if (router.pathname === "/") {

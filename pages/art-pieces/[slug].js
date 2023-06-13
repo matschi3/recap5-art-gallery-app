@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import ArtPieceDetails from "../../components/ArtPieceDetails";
+import CommentForm from "../../components/CommentForm";
 
 const ArtPiecePage = ({
   artPieces,
   favoriteArtPieces,
   setFavoriteArtPieces,
+  comments,
+  setComments,
 }) => {
   const router = useRouter();
   const { slug } = router.query;
@@ -31,6 +34,14 @@ const ArtPiecePage = ({
     }
   };
 
+  const handleCommentSubmit = (comment) => {
+    const newComment = {
+      text: comment,
+      date: new Date().toISOString(),
+    };
+    setComments([...comments, newComment]);
+  };
+
   return (
     <>
       <ArtPieceDetails
@@ -41,6 +52,8 @@ const ArtPiecePage = ({
         genre={genre}
         isFavorite={isFavorite}
         onToggleFavorite={onToggleFavorite}
+        comments={comments} // Pass the comments prop
+        onSubmitComment={handleCommentSubmit} // Pass the onSubmitComment prop
       />
     </>
   );
