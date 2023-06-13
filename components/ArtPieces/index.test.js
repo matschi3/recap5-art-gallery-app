@@ -147,7 +147,7 @@ test("render an img for each ArtPiecePreview", () => {
 
 // Each art piece's {image, title, artist} is displayed // test on [0]
 
-test("render images of artPiece with correct alt-Text", () => {
+test("render images of artPieces with correct alt-Text", () => {
   render(<ArtPieces pieces={pieces} />);
   const imagesArtPiece = screen.getAllByRole("img");
   expect(imagesArtPiece).toHaveLength(pieces.length);
@@ -160,12 +160,15 @@ test("render images of artPiece with correct alt-Text", () => {
   });
 });
 
-test("render title of artPiece[index0]", () => {
+test("render titles of artPieces with correct titleNames", () => {
   render(<ArtPieces pieces={pieces} />);
-  const titleHeading = screen.getByRole("heading", {
-    name: /orange red and green abstract painting/i,
+  const titleHeadings = screen.getAllByRole("heading", { level: 2 }); // 'level: 2 is the h2 element
+
+  expect(titleHeadings).toHaveLength(pieces.length);
+
+  titleHeadings.forEach((heading, index) => {
+    expect(heading).toHaveTextContent(pieces[index].name);
   });
-  expect(titleHeading).toBeInTheDocument();
 });
 
 test("render artist of artPiece[index0]", () => {
