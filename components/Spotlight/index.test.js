@@ -122,3 +122,21 @@ const pieces = [
     dimensions: { height: 2880, width: 1920, type: "jpg" },
   },
 ];
+
+// same as in /pages/index.js for getting rando piece
+const pickRandomArtPiece = (artPieces) => {
+  const randomIndex = Math.floor(Math.random() * artPieces.length);
+  return artPieces[randomIndex];
+};
+const spotlightPiece = pickRandomArtPiece(pieces);
+
+test("the art piece img is displayed", () => {
+  render(
+    <Spotlight
+      image={spotlightPiece.imageSource}
+      artist={spotlightPiece.artist}
+    />
+  );
+  const spotlightImage = screen.getByRole("img");
+  expect(spotlightImage).toBeInTheDocument();
+});
