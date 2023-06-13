@@ -144,3 +144,13 @@ test("render an img for each ArtPiecePreview", () => {
   //console.log(listImages);
   expect(listImages).toHaveLength(pieces.length);
 });
+
+// Each art piece's {image, title, artist} is displayed
+
+test("render image of artPiece[index0]", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const img = screen.getByRole("img", {
+    name: /orange red and green abstract painting/i,
+  });
+  expect(img).toBeInTheDocument();
+});
