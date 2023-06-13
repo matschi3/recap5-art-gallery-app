@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import SpotlightPage from "./index";
 import ArtPiecesPage from "./art-pieces/index";
 import Layout from "@/components/Layout";
+import Link from "next/link";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 

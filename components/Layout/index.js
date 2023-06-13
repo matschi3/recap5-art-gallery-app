@@ -12,6 +12,9 @@ export default function Layout({ children }) {
             <li>
               <Link href="/art-pieces">Pieces</Link>
             </li>
+            <li>
+              <Link href="/favorites">Favorites</Link>
+            </li>
           </ul>
         </nav>
       </header>

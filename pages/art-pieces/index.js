@@ -33,7 +33,7 @@ export default function ArtPiecesPage({
       <ArtPieces
         pieces={artPieces}
         onClick={handleArtPieceClick}
-        isFavorite={isFavorite} // Pass isFavorite prop
+        isFavorite={(slug) => isFavorite(slug)} // Pass isFavorite as a function
         onToggleFavorite={onToggleFavorite} // Pass onToggleFavorite prop
       />
     </>
