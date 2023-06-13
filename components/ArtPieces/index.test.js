@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import ArtPieces from ".";
-//import pieces from "../../pages/index.js";
 
 const pieces = [
   {
