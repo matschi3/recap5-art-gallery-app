@@ -1,6 +1,61 @@
 import { render, screen } from "@testing-library/react";
 import ArtPieces from ".";
 
+test("render an ul for all the ArtPiecePreview", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const unorderedList = screen.getByRole("list");
+  expect(unorderedList).toBeInTheDocument();
+});
+
+test("render an li for each ArtPiecePreview", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const listItems = screen.getAllByRole("listitem");
+  expect(listItems).toHaveLength(pieces.length);
+});
+
+test("render an img for each ArtPiecePreview", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const listImages = screen.getAllByRole("img", { name: pieces.title });
+  expect(listImages).toHaveLength(pieces.length);
+});
+
+// Each art piece's {image, title, artist} is displayed // test on [0]
+
+test("render all images from artPieces with correct alt-Text", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const imagesArtPiece = screen.getAllByRole("img");
+  expect(imagesArtPiece).toHaveLength(pieces.length);
+
+  imagesArtPiece.forEach((image, index) => {
+    expect(image).toHaveProperty("alt", pieces[index].name);
+    //expect(image).toHaveProperty("src", `${pieces[index].imageSource}/$/i`);
+    // regularExpression: '/$' to check if it just ends with expected url. because of local dev server having differt path.
+    // deaktivated, because of way too differt url's  :/
+  });
+});
+
+test("render all titles from artPieces with correct titleNames", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const titleHeadings = screen.getAllByRole("heading", { level: 2 }); // 'level: 2 is the h2 element
+
+  expect(titleHeadings).toHaveLength(pieces.length);
+
+  titleHeadings.forEach((heading, index) => {
+    expect(heading).toHaveTextContent(pieces[index].name);
+  });
+});
+
+test("render all artists from artPieces with correct artistNames", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const artistParagraphs = screen.getAllByText(/^Artist: /); // starts with 'Artist: '
+  expect(artistParagraphs).toHaveLength(pieces.length);
+
+  artistParagraphs.forEach((paragraph, index) => {
+    expect(paragraph).toHaveTextContent(`Artist: ${pieces[index].artist}`);
+  });
+});
+
+// data for testing
 const pieces = [
   {
     slug: "orange-red-and-green",
@@ -121,61 +176,3 @@ const pieces = [
     dimensions: { height: 2880, width: 1920, type: "jpg" },
   },
 ];
-
-test("render an ul for all the ArtPiecePreview", () => {
-  render(<ArtPieces pieces={pieces} />);
-  const unorderedList = screen.getByRole("list");
-  //console.log(unorderedList);
-  expect(unorderedList).toBeInTheDocument();
-});
-
-test("render an li for each ArtPiecePreview", () => {
-  render(<ArtPieces pieces={pieces} />);
-  const listItems = screen.getAllByRole("listitem");
-  //console.log(listItems);
-  expect(listItems).toHaveLength(pieces.length);
-});
-
-test("render an img for each ArtPiecePreview", () => {
-  render(<ArtPieces pieces={pieces} />);
-  const listImages = screen.getAllByRole("img", { name: pieces.title });
-  //console.log(listImages);
-  expect(listImages).toHaveLength(pieces.length);
-});
-
-// Each art piece's {image, title, artist} is displayed // test on [0]
-
-test("render all images from artPieces with correct alt-Text", () => {
-  render(<ArtPieces pieces={pieces} />);
-  const imagesArtPiece = screen.getAllByRole("img");
-  expect(imagesArtPiece).toHaveLength(pieces.length);
-
-  imagesArtPiece.forEach((image, index) => {
-    expect(image).toHaveProperty("alt", pieces[index].name);
-    //expect(image).toHaveProperty("src", `${pieces[index].imageSource}/$/i`);
-    // regularExpression: '/$' to check if it just ends with expected url. because of local dev server having differt path.
-    // deaktivated, because of way too differt url's  :/
-  });
-});
-
-test("render all titles from artPieces with correct titleNames", () => {
-  render(<ArtPieces pieces={pieces} />);
-  const titleHeadings = screen.getAllByRole("heading", { level: 2 }); // 'level: 2 is the h2 element
-
-  expect(titleHeadings).toHaveLength(pieces.length);
-
-  titleHeadings.forEach((heading, index) => {
-    expect(heading).toHaveTextContent(pieces[index].name);
-  });
-});
-
-test("render all artists from artPieces with correct artistNames", () => {
-  render(<ArtPieces pieces={pieces} />);
-  const artistParagraphs = screen.getAllByText(/^Artist: /); // starts with 'Artist: '
-  //console.log(artistParagraphs);
-  expect(artistParagraphs).toHaveLength(pieces.length);
-
-  artistParagraphs.forEach((paragraph, index) => {
-    expect(paragraph).toHaveTextContent(`Artist: ${pieces[index].artist}`);
-  });
-});
