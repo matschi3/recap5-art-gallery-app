@@ -145,7 +145,7 @@ test("render an img for each ArtPiecePreview", () => {
   expect(listImages).toHaveLength(pieces.length);
 });
 
-// Each art piece's {image, title, artist} is displayed
+// Each art piece's {image, title, artist} is displayed // test on [0]
 
 test("render image of artPiece[index0]", () => {
   render(<ArtPieces pieces={pieces} />);
@@ -153,4 +153,12 @@ test("render image of artPiece[index0]", () => {
     name: /orange red and green abstract painting/i,
   });
   expect(img).toBeInTheDocument();
+});
+
+test("render title of artPiece[index0]", () => {
+  render(<ArtPieces pieces={pieces} />);
+  const h2 = screen.getByRole("heading", {
+    name: /orange red and green abstract painting/i,
+  });
+  expect(h2).toBeInTheDocument();
 });
